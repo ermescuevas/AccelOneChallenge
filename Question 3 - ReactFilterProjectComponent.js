@@ -1,13 +1,13 @@
-import React, { fetchState, fetchData } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ProjectFetchComponent = () => {
-  const [projects, setProjects] = fetchState([]);
-  const [filteredProjects, filterProjects] = fetchState([]);
-  const [searchTerm, processSearch] = fetchState('');
-  const [error, showError] = fetchState(null);
-  const [loading, stateLoading] = fetchState(true);
+  const [projects, setProjects] = useState([]);
+  const [filteredProjects, filterProjects] = useState([]);
+  const [searchTerm, processSearch] = useState('');
+  const [error, showError] = useState(null);
+  const [loading, stateLoading] = useState(true);
 
-  fetchData(() => {
+  useEffect(() => {
     const getProjects = async () => {
       try {
         const response = await fetch('YOUR_API_URL_HERE');
@@ -75,7 +75,7 @@ projects: Stores the list of projects fetched from the API.
 filteredProjects: Get the filtered projects when the user perform a search.
 searchTerm: Is the text that inputs the user from the search bar
 loading and error: Handle loading and error states during the API fetch process.
-The fetchData fetches data from an API when the component mounts. The fetched data is stored in projects and initially in filteredProjects.
+The useEffect fetches data from an API when the component mounts. The fetched data is stored in projects and initially in filteredProjects.
 The onSearchChange function updates the searchTerm and filters the projects array based on the search input. 
 Validates if exists the project using the project name and toLower for be case insensitive
 
